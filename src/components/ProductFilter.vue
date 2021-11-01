@@ -146,7 +146,9 @@
 </template>
 
 <script>
-import categories from '@/data/categories'
+// import categories from '@/data/categories'
+import axios from 'axios'
+import {API_BASE_URL, API_PRODUCT_CATEGORIES} from '../config'
 
 export default {
   name: "ProductFilter",
@@ -156,21 +158,23 @@ export default {
       currentPriceFrom: 0,
       currentPriceTo: 0,
       currentCategoryId: 0,
+      
+      categoriesData: null,
     }
   },
   computed: {
     categories() {
-      return categories
+      return this.categoriesData ? this.categoriesData.items : []
     }
   },
   watch: {
-    priceFrom(value){
+    priceFrom(value) {
       this.currentPriceFrom = value
     },
-    priceTo(value){
+    priceTo(value) {
       this.currentPriceTo = value
     },
-    categoryId(value){
+    categoryId(value) {
       this.currentCategoryId = value
     },
   },
@@ -184,7 +188,14 @@ export default {
       this.$emit('update:priceFrom', 0)
       this.$emit('update:priceTo', 0)
       this.$emit('update:categoryId', 0)
-    }
+    },
+    loadCategories(){
+      axios.get(API_BASE_URL + API_PRODUCT_CATEGORIES)
+      .then(response => this.categoriesData = response.data)
+    },
+  },
+  created() {
+    this.loadCategories()
   },
 }
 </script>
