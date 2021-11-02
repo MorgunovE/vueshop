@@ -119,11 +119,23 @@
 //   product: 'ProductPage'
 // }
 import CartIndicator from '@/components/CartIndicator'
+import {mapActions, mapMutations} from 'vuex'
 export default {
   name: 'App',
   components: {
     CartIndicator
-  }
+  },
+  created(){
+    const userAccessKey = localStorage.getItem('userAccessKey')
+    if(userAccessKey){
+      this.updateUserAccessKey(userAccessKey)
+    }
+    this.loadCart()
+  },
+  methods: {
+    ...mapActions(['loadCart']),
+    ...mapMutations(['updateUserAccessKey'])
+  },
   // data() {
   //   return {
   //     currentPage: 'main',
