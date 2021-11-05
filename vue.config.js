@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/vueshop/dist/'
+  publicPath: '/dist/'
 }
