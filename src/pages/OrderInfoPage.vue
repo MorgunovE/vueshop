@@ -74,7 +74,7 @@
           </ul>
           <div class="cart__total">
             <p>Доставка: <b>{{$store.state.sendPrice.value}} ₽</b></p>
-            <p>Итого: <b>3</b> товара на сумму <b>{{ ($store.state.orderProducts.orderProductsPrice + $store.state.sendPrice.value)| numberFormat}} ₽</b></p>
+            <p>Итого: <b>3</b> товара на сумму <b>{{ ($store.state.orderProducts.orderProductsPrice + ($store.state.sendPrice.value || 0))| numberFormat}} ₽</b></p>
           </div>
         </div>
       </form>

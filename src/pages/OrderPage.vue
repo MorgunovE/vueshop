@@ -126,7 +126,7 @@ export default {
     ...mapGetters({products: 'cartDetailProducts', totalPrice: 'cartTotalPrice'}),
     sendPrice:{
       get(){
-        return this.$store.state.sendPrice.value
+        return this.$store.state.sendPrice.value || 0
       },
       set(value){
         this.$store.commit('updateSendPrice', {value})
