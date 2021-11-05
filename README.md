@@ -1,5 +1,5 @@
 # vueshop
-
+https://morgunove.github.io/vueshop/dist/
 ## Project setup
 ```
 npm install
