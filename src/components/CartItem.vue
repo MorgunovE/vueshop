@@ -30,7 +30,7 @@
       {{(item.amount * item.product.price) | numberFormat}} ₽
     </b>
     
-    <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины" @click.prevent="deleteProduct(item.productId)">
+    <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины" @click.prevent="deleteProduct">
       <svg width="20" height="20" fill="currentColor">
         <use xlink:href="#icon-close"></use>
       </svg>
@@ -40,7 +40,7 @@
 
 <script>
 import numberFormat from '@/helpers/numberFormat'
-import {mapMutations} from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 export default {
   name: "CartItem",
   props: ['item'],
@@ -56,7 +56,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({deleteProduct:'deleteCartProduct',addProduct:'addAmountToCart',reduceProduct:'reduceAmountToCart'}),
+    ...mapActions(['deleteProductToCart']),
+    deleteProduct(){
+      console.log(this.item.productId)
+      this.deleteProductToCart({productId: this.item.productId})
+    },
+    ...mapMutations({addProduct:'addAmountToCart',reduceProduct:'reduceAmountToCart'}),
   },
 }
 </script>
